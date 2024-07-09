@@ -1,18 +1,19 @@
 # HWID 激活系统
 
-HWID 激活是指基于硬件设备的唯一标识符（HWID）进行软件激活的一种方式。
+通过 HWID 激活系统是指基于硬件设备的唯一标识符（HWID）进行系统激活的一种方式。
 
-HWID 通常由计算机的硬件组件（如 CPU、主板、硬盘、网卡等）生成的唯一标识符组成，用于唯一标识一台计算机。
+> HWID 通常由计算机的硬件组件（如 CPU、主板、硬盘、网卡等）生成的唯一标识符组成，用于唯一标识一台计算机。
 
 本文主要介绍通过 HWID 激活 Windows 操作系统。
 
 > 官方文档及密钥：<https://massgrave.dev/hwid.html>
 >
-> 票据文件：<https://pixeldrain.com/u/pExQ5L8f> 或使用此文档中 `Packages\Tickets.zip` 或使用 cnd 加速链接 <https://oss.isiou.cn/package/Tickets.zip>
+> 票据文件链接：<https://oss.isiou.cn/package/HWID-Tickets.zip>
 
 ## 前提条件
 
 - 确保计算机已连接互联网
+
 - 需要管理员权限来执行这些操作
 
 ## 激活步骤
@@ -21,15 +22,15 @@ HWID 通常由计算机的硬件组件（如 CPU、主板、硬盘、网卡等�
 
 2. 输入密钥
 
-   - 在 PowerShell 中输入以下命令，将 `<key>` 替换为你拥有的密钥
+   - 在 PowerShell 中输入以下命令，将 `key` 替换为需要激活的系统密钥
 
      ```powershell
-     slmgr /ipk <key>
+     slmgr /ipk key
      ```
 
-3. 下载票据文件并解压
+3. 下载票据文件并解压，文件链接见上
 
-4. 获取当前操作系统产品 ID
+4. 获取当前系统 ID
 
    - 在 PowerShell 中输入以下命令：
 

@@ -118,7 +118,7 @@
 
    确保防火墙允许 HTTPS 流量。
 
-   使用 `ufw` 进行配置：
+   若使用 `ufw` 则需进行以下配置：
 
    ```shell
    sudo apt install ufw -y
