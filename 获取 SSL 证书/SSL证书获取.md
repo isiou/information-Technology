@@ -1,27 +1,27 @@
-# 申请自动 SSL 证书
+# 获取 SSL 证书
 
 ## 前置：配置 Nginx 服务器
 
-1. 更新系统软件包
+1. 更新系统软件包：
 
    ```bash
    sudo apt update && sudo apt upgrade -y
    ```
 
-2. 安装 Nginx
+2. 安装 Nginx：
 
    ```bash
    sudo apt install nginx -y
    ```
 
-3. 启动并设置开机启动 Nginx
+3. 启动并设置开机启动 Nginx：
 
    ```bash
    sudo systemctl start nginx
    sudo systemctl enable nginx
    ```
 
-4. 配置站点
+4. 配置站点：
 
    在 `/etc/nginx/sites-available/` 目录下为您的站点创建一个新的配置文件，例如 `example.com`。
 
@@ -80,13 +80,13 @@
 
 ## 获取证书
 
-1. 更新系统软件源到最新
+1. 更新系统软件源到最新：
 
    ```shell
    sudo apt update && sudo apt upgrade -y
    ```
 
-2. 安装 Certbot
+2. 安装 Certbot：
 
    若使用的是 Nginx 服务器，可使用以下命令安装 Certbot：
 
@@ -94,7 +94,7 @@
    sudo apt install certbot python3-certbot-nginx
    ```
 
-3. 获取证书
+3. 获取证书：
 
    对于 Nginx 服务器，使用以下命令：
 
@@ -104,7 +104,7 @@
 
    在运行这些命令后，Certbot 会自动检测服务器配置，并引导完成安装过程。这包括选择要为其启用 HTTPS 的域名，并自动更新 Web 服务器配置以使用新证书。
 
-4. 自动续订证书
+4. 自动续订证书：
 
    Let's Encrypt 的证书有效期为 90 天。Certbot 提供了自动续订功能。默认情况下，Certbot 包的续订脚本会添加到 `/etc/cron.d` 或 systemd 定时任务中。
 
@@ -114,17 +114,17 @@
    sudo certbot renew --dry-run
    ```
 
-5. 配置防火墙
+5. 配置防火墙：
 
    确保防火墙允许 HTTPS 流量。
 
-   若使用 `ufw` 则需进行以下配置：
+   使用 `ufw` 进行配置：
 
    ```shell
    sudo apt install ufw -y
    sudo ufw allow 'Nginx Full'
    ```
 
-6. 验证 HTTPS
+6. 验证 HTTPS：
 
    完成上述步骤后，访问域名 `https://example.com`(替换 example) 以验证 HTTPS 是否已正确启用。

@@ -1,4 +1,4 @@
-# 搭建内网穿透
+# 使用 frp 搭建内网穿透服务
 
 ## 内网穿透
 
@@ -14,25 +14,24 @@ FRP 是一个专为内网穿透而设计的高效、灵活的反向代理应用�
 
 ### 需要的设备
 
-1. 有一台具有公网 IP 的服务器（即服务端）
-2. 需要暴露的内网设备（即客户端）
+1. 有一台具有公网 IP 的服务器（即服务端）。
+
+2. 需要暴露的内网设备（即客户端）。
 
 ### 部署服务端
 
-本文以当前日期（24/6/14）最新版本为例，搭建普通 TCP 穿透服务。
+本文以当前日期（24/8/7）最新版本为例，搭建普通 TCP 穿透服务。
 
-> 24/7/9 更新：原地址已失效，新资源地址：<https://oss.isiou.cn/package/frp_0.58.1_linux_amd64.tar.gz>
-
-1. 在服务器上下载并解压 FRP
+1. 在服务器上下载并解压 FRP：
 
    ```shell
-   wget https://oss.isiou.cn/package/frp_0.58.1_linux_amd64.tar.gz
+   wget https://github.com/fatedier/frp/releases/download/v0.59.0/frp_0.59.0_linux_amd64.tar.gz
    tar -xzf frp_0.58.1_linux_amd64.tar.gz
    ```
 
-2. 进入目录后，可见 `frps.toml` 文件，此文件为服务端配置文件
+2. 进入目录后，可见 `frps.toml` 文件，此文件为服务端配置文件。
 
-3. 配置 `frps.toml` 文件
+3. 配置 `frps.toml` 文件：
 
    ```ini
    # 全局参数
@@ -47,7 +46,7 @@ FRP 是一个专为内网穿透而设计的高效、灵活的反向代理应用�
    remote_port = 7001       # 客户端访问端口
    ```
 
-4. 在服务端启动 FRP 服务
+4. 在服务端启动 FRP 服务：
 
    ```shell
    ./frps -c ./frps.toml
@@ -57,11 +56,9 @@ FRP 是一个专为内网穿透而设计的高效、灵活的反向代理应用�
 
 以客户端为 Windows 系统为例。
 
-> 24/7/8 更新：原地址已失效，新资源地址：<https://oss.isiou.cn/package/frp_0.58.1_windows_amd64.zip>
+1. 下载最新 FRP 压缩包文件：<https://github.com/fatedier/frp/releases/download/v0.59.0/frp_0.59.0_windows_amd64.zip>
 
-1. 下载最新 FRP 压缩包文件 <https://oss.isiou.cn/package/frp_0.58.1_windows_amd64.zip>
-
-2. 解压后编辑文件夹内 `frpc.toml` 文件
+2. 解压后编辑文件夹内 `frpc.toml` 文件：
 
    ```ini
    # 全局配置
@@ -73,22 +70,22 @@ FRP 是一个专为内网穿透而设计的高效、灵活的反向代理应用�
    [test-tcp]
    type = tcp                       # 指定该服务为 TCP 类型
    local_ip = 127.0.0.1             # 本机 IP
-   local_port = xxxx                # 内网服务运行的端口，可更改
+   local_port = 56657               # 内网服务运行的端口，可更改
    remote_port = 7001               # 外网访问所使用的端口，与服务端一致
    ```
 
-3. 在客户端启动 FRP 服务
+3. 在客户端启动 FRP 服务：
 
    ```shell
-   PS D:\frp_0.58.1_windows_amd64>./frpc -c ./frpc.toml
+   PS D:\frp_0.59.0_windows_amd64>./frpc -c ./frpc.toml
    ```
 
 ## 解释
 
 进行以上配置后，即可通过服务端 IP 和端口号访问到内网设备的服务。
 
-在以上示例中，配置完成并启动后即可通过 `xxx.xx.xx.xx:7001` 访问到内网设备运行在 xxxx 端口的服务。
+在以上示例中，配置完成并启动后即可通过 `xxx.xx.xx.xx:7001` 访问到内网设备运行在 56657 端口的服务。
 
 若想要让 FRP 在服务端服务长期运行，可以将它们配置为系统服务或使用工具（如 PM2 等）长期托管在后台，并在出现故障时自动重启。本文再次不再赘述。
 
-> 若需了解 FRP 项目以及更详细内容，请访问原作者：<https://github.com/fatedier/frp>
+> 若需了解 FRP 项目以及更详细内容，请访问原项目：<https://github.com/fatedier/frp>
